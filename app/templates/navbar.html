@@ -1,0 +1,140 @@
+<!-- main title -->
+<div class="col-12">
+    <div class="main__title">
+        <h2>[NAVBAR_TITLE]</h2>
+
+        <span class="main__title-stat"></span>
+
+        <div class="main__title-wrap">
+            <!-- filter sort -->
+            <div class="filter" id="filter__sort">
+                <span class="filter__item-label">Sort by:</span>
+
+                <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-sort" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <input type="button" id="category-input">
+                    <span></span>
+                </div>
+                <ul id="category-list" class="filter__item-menu dropdown-menu scrollbar-dropdown"
+                    aria-labelledby="filter-sort">
+                    <!-- The list items will be added by JavaScript -->
+                </ul>
+
+                <script>
+
+                    const categories = {{ categories | tojson }};
+
+                    // Set the first category as the value of category-input, if it exists
+                    const categoryInput = document.getElementById('category-input');
+                    if (categoryInput !== null && categories.length > 0) {
+                        categoryInput.value = categories[0];
+                    }
+
+
+
+
+                    // Generate the category list items and insert them into the category-list element
+                    const categoryList = categories.map(cat => `
+                        <li onclick="redirectToQuery('${cat}')">${cat}</li>
+                    `).join('');
+                    document.getElementById('category-list').innerHTML = categoryList;
+
+
+                    // Function to redirect to the desired URL with the selected query parameter
+                    function redirectToQuery(query) {
+                        const url = `/category/${encodeURIComponent(textToSlug(query))}`; // Construct the URL with the query parameter
+
+                        // Redirect the page to the generated URL
+                        window.location.href = url;
+                    }
+                </script>
+
+            </div>
+            <!-- end filter sort -->
+
+            <!-- search -->
+            <form action="/" class="main__title-form" id="search-form">
+                <input type="text" id="query" placeholder="Find Entries" autocomplete="off">
+                <button type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+
+
+            <script>
+
+
+                function textToSlug(text) {
+                    let slug = text.toLowerCase();
+
+                    // Remove special characters except hyphens and underscores
+                    slug = slug.replace(/[^a-z0-9-_\\s]/g, '');
+
+                    // Replace spaces with hyphens
+                    slug = slug.replace(/\s+/g, '-');
+
+                    // Remove multiple hyphens
+                    slug = slug.replace(/-+/g, '-');
+
+                    // Remove leading and trailing hyphens
+                    slug = slug.replace(/^-+|-+$/g, '');
+
+                    return slug;
+                }
+
+                function slugToText(slug) {
+                    // Replace hyphens with spaces
+                    let text = slug.replace(/-/g, ' ');
+
+                    // Convert text to title case
+                    text = text.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+
+                    // Replace underscores with spaces
+                    text = text.replace(/_/g, ' ');
+
+                    return text;
+                }
+
+                document.getElementById("search-form").addEventListener("submit", function (event) {
+                    event.preventDefault(); // Prevents the default form submission behavior
+
+                    const query = document.getElementById("query").value; // Get the value entered in the input field
+                    const url = `?s=${encodeURIComponent(query)}`; // Construct the URL with the query parameter
+
+                    // Redirect the page to the generated URL
+                    window.location.href = url;
+                });
+
+
+
+                function formatCreatedTime(isoString) {
+                    const date = new Date(isoString);
+
+                    const options = {
+                        year: 'numeric',
+                        month: 'long',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: true
+                    };
+
+                    return date.toLocaleString('en-US', options).replace(',', ' at');
+                }
+
+
+                function truncateText(text, maxWords) {
+                    const words = text.split(' ');
+                    if (words.length > maxWords) {
+                        return words.slice(0, maxWords).join(' ') + '...';
+                    }
+                    return text;
+                }
+
+            </script>
+
+            <!-- end search -->
+        </div>
+    </div>
+</div>
+<!-- end main title -->

@@ -1,0 +1,9 @@
+Flask
+Flask-Login
+Flask-WTF
+Flask-Cors
+requests
+pytz
+email_validator
+git+https://github.com/aditya76-git/pynotiondb.git
+oauthlib

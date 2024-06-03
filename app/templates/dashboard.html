@@ -1,0 +1,160 @@
+{% include 'header.html' %}
+
+
+{% include 'sidebar.html' %}
+
+<!-- main content -->
+<main class="main">
+    <div class="container-fluid">
+        <div class="row">
+            {% include 'navbar.html' %}
+
+            <!-- users -->
+            <div class="col-12">
+                <div class="main__table-wrap">
+                    <table class="main__table">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-book"></i> Title</th>
+                                <th><i class="fas fa-folder"> Category</th>
+                                <!-- <th>VIEWS</th> -->
+                                <th><i class="fas fa-chart-line"> Status</th>
+                                <th><i class="fas fa-clock"> Created At</th>
+                                <th><i class="fas fa-cogs"> Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr id="loading-row">
+                                <td colspan="5">
+                                    <div class="loading-message">
+
+                                        <!-- loading -->
+                                        <div class="col-12">
+                                            <div class="profile__content">
+                                                <!-- profile user -->
+                                                <div class="profile__user">
+                                                    <!-- or red -->
+                                                    <div class="profile__meta profile__meta--green">
+                                                        <h3>Loading Diary Entries <span>(@[USERNAME])</span></h3>
+                                                        <span>Please Wait...</span>
+                                                    </div>
+                                                </div>
+                                                <!-- end profile user -->
+
+
+
+                                                <!-- profile btns -->
+                                                <div class="profile__actions">
+                                                    <a href="/view/{postid}"
+                                                        class="profile__action profile__action--banned open-modal"><i
+                                                            class="fas fa-eye"></i></a>
+                                                </div>
+                                                <!-- end profile btns -->
+                                            </div>
+                                        </div>
+                                        <!-- end loading -->
+
+
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <script>
+                                const tableBody = document.querySelector('.main__table tbody');
+                                const loadingRow = document.getElementById('loading-row');
+                                const loadingMessage = document.querySelector('.loading-message');
+
+                                fetch('/api/get-entries/{{ encrypted_username }}{{ additional_param }}')
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        // Create an HTML string for the entries
+                                        const entriesHTML = data.data.map(entry => `
+                                          <tr>
+                                            <td>
+                                              <div class="main__table-text"><a href="/view/${entry.postid}">${entry.diary_title}</a></div>
+                                            </td>
+                                            <td>
+                                              <div class="main__table-text">${entry.category}</div>
+                                            </td>
+                                            <td>
+                                             <div class="main__table-text main__table-text--${entry.sharing === 'private' ? 'red' : 'green'}">${entry.sharing.toUpperCase()}</div>
+                                            </td>
+                                            <td>
+                                               <div class="main__table-text">${formatCreatedTime(entry.created_time)}</div>
+                                            </td>
+                                            <td>
+                                              <div class="main__table-btns">
+                                                <a href="/view/${entry.postid}" class="main__table-btn main__table-btn--view">
+                                                  <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="/edit/${entry.postid}" class="main__table-btn main__table-btn--edit">
+                                                  <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="/delete/${entry.postid}" class="main__table-btn main__table-btn--delete open-modal">
+                                                  <i class="fas fa-trash"></i>
+                                                </a>
+                                              </div>
+                                            </td>
+                                          </tr>
+                                        `).join('');
+
+
+                                        tableBody.innerHTML = entriesHTML;
+                                        loadingRow.style.display = 'none';
+                                    })
+                                    .catch(error => {
+                                        loadingMessage.innerHTML = `
+                                            <div class="col-12">
+                                                <div class="profile__content">
+                                                    <div class="profile__user">
+                                                        <div class="profile__meta profile__meta--red">
+                                                            <h3>Error <span>(@[USERNAME])</span></h3>
+                                                            <span>Error Fetching Entries Please Refresh...</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        `;
+
+                                        console.error(error);
+                                    });
+
+                            </script>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- end users -->
+
+            <!-- paginator -->
+            <div class="col-12">
+                <div class="paginator-wrap">
+                    <span>10 from 14 452</span>
+
+                    <ul class="paginator">
+                        <li class="paginator__item paginator__item--prev">
+                            <a href="#"><i class="fas fa-arrow-left"></i></a>
+                        </li>
+                        <!-- <li class="paginator__item"><a href="#">1</a></li>
+                        <li class="paginator__item paginator__item--active"><a href="#">2</a></li>
+                        <li class="paginator__item"><a href="#">3</a></li>
+                        <li class="paginator__item"><a href="#">4</a></li> -->
+                        <li class="paginator__item paginator__item--next">
+                            <a href="#"><i class="fas fa-arrow-right"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end paginator -->
+        </div>
+    </div>
+</main>
+<!-- end main content -->
+
+
+{% include 'footer.html' %}

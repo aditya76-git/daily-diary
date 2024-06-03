@@ -1,0 +1,46 @@
+{% include 'header.html' %}
+
+
+{% include 'sidebar.html' %}
+
+
+<!-- main content -->
+<main class="main">
+    <div class="container-fluid">
+        <div class="row">
+
+
+            {% include 'navbar.html' %}
+            <div class="col-12">
+
+                <div class="col-12" bis_skin_checked="1">
+                    <div class="comments" bis_skin_checked="1">
+                        <ul class="comments__list">
+                            <li class="comments__item">
+                                <div class="comments__autor" bis_skin_checked="1">
+                                    <img class="comments__avatar" src="[PROFILE_PHOTO]" alt="">
+                                    <span class="comments__name">[POST_TITLE]</span>
+                                    <span class="comments__time">[POST_CREATED_TIME]</span>
+                                    <span class="reviews__rating reviews__rating--green">[POST_EMOJI]</span>
+                                </div>
+                                <p class="comments__text">[POST_DESCRIPTION]</p>
+
+                            </li>
+
+                            <a href="{{ url_for('main.edit_entry', postid=postid) }}">
+                                <button type="button" class="form__btn">Edit</button>
+                            </a>
+
+                        </ul>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+<!-- end main content -->
+
+{% include 'footer.html' %}

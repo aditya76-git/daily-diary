@@ -1,0 +1,71 @@
+<!-- sidebar -->
+<div class="sidebar">
+    <!-- sidebar logo -->
+    <a href="/" class="sidebar__logo">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+    </a>
+    <!-- end sidebar logo -->
+
+    <!-- sidebar user -->
+    <div class="sidebar__user">
+        <div class="sidebar__user-img">
+            <img src="[PROFILE_PHOTO]" alt="">
+        </div>
+
+
+        <div id="sidebar-user-data" bis_skin_checked="1">
+            <div class="sidebar__user-title" bis_skin_checked="1">
+                <span>[USERID]</span>
+                <p>[USERNAME]</p>
+            </div>
+        </div>
+
+
+        <button class="sidebar__user-btn" type="button" href="/logout">
+            <i class="fas fa-sign-out"></i>
+        </button>
+    </div>
+    <!-- end sidebar user -->
+
+    <!-- sidebar nav -->
+    <div class="sidebar__nav-wrap">
+        <ul class="sidebar__nav">
+            <li class="sidebar__nav-item">
+                <a href="/dashboard"
+                    class="sidebar__nav-link sidebar__nav-link{% if active_page == 'dashboard' %}--active{% endif %}">
+                    <i class="fa-solid fa-square"></i> <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li class="sidebar__nav-item">
+                <a href="/create"
+                    class="sidebar__nav-link sidebar__nav-link{% if active_page == 'add-entry' %}--active{% endif %}">
+                    <i class="fas fa-plus"></i>
+                    <span>Add Entry</span>
+                </a>
+            </li>
+
+            <li class="sidebar__nav-item">
+                <a href="/add-category"
+                    class="sidebar__nav-link sidebar__nav-link{% if active_page == 'category' %}--active{% endif %}">
+                    <i class="fas fa-folder"></i> <span>Categories</span>
+                </a>
+            </li>
+
+            <li class="sidebar__nav-item">
+                <a href="/settings" class="sidebar__nav-link{% if active_page == 'settings' %}--active{% endif %}">
+                    <i class="fas fa-gear"></i> <span>Settings</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- end sidebar nav -->
+
+
+    <div class="sidebar__copyright">User Joined on [USER_JOINED_ON]</span> <br>Created by <a
+            href="https://github.com/aditya76-git" target="_blank">aditya76-git</a></div>
+
+
+    <!-- end sidebar copyright -->
+</div>
+<!-- end sidebar -->
