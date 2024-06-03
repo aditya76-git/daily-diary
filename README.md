@@ -29,19 +29,13 @@
 ## **Built With**
 
 <p align="center">
-<a href="https://www.python.org/">
-  <img src="https://img.shields.io/static/v1?label=&message=Python&color=white&style=for-the-badge&logo=python" height="25px" />
-</a>&nbsp; &nbsp; &nbsp;
-<a href="https://flask.palletsprojects.com/">
-  <img src="https://img.shields.io/static/v1?label=&message=Flask&color=white&style=for-the-badge&logo=flask&logoColor=black" height="25px" />
-</a>&nbsp; &nbsp; &nbsp;
-<a href="https://flask-wtf.readthedocs.io/">
-  <img src="https://img.shields.io/static/v1?label=&message=Flask-WTF&color=white&style=for-the-badge" height="25px" />
-</a>&nbsp; &nbsp; &nbsp;
-<a href="https://flask-login.readthedocs.io/">
-  <img src="https://img.shields.io/static/v1?label=&message=Flask-Login&color=white&style=for-the-badge" height="25px" />
-</a>&nbsp; &nbsp; &nbsp;
-<a href="https://github.com/aditya76-git/pynotiondb/">
-  <img src="https://img.shields.io/static/v1?label=&message=pynotiondb&color=white&style=for-the-badge" height="25px" />
-</a>&nbsp; &nbsp; &nbsp;
+<img src="https://img.shields.io/static/v1?label=&message=Python&color=white&style=for-the-badge&logo=python" height="25px" />&nbsp; &nbsp; &nbsp;
+<img src="https://img.shields.io/static/v1?label=&message=Flask&color=white&style=for-the-badge&logo=flask&logoColor=black" height="25px" />
+&nbsp; &nbsp; &nbsp;
+<img src="https://img.shields.io/static/v1?label=&message=Flask-WTF&color=white&style=for-the-badge" height="25px" />
+&nbsp; &nbsp; &nbsp;
+<img src="https://img.shields.io/static/v1?label=&message=Flask-Login&color=white&style=for-the-badge" height="25px" />
+&nbsp; &nbsp; &nbsp;
+<img src="https://img.shields.io/static/v1?label=&message=pynotiondb&color=white&style=for-the-badge" height="25px" />
+&nbsp; &nbsp; &nbsp;
  </p>
