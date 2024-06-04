@@ -1,4 +1,3 @@
-
 import random
 from ..database import usersdb
 from ..models import User
@@ -187,11 +186,18 @@ def signup():
             flash("Passwords didn't match. Please try again.", "red")
         else:
             user_data = usersdb.execute(
-                "SELECT * FROM users WHERE {} = '{}'".format(USERS_DB_PROPS.USERNAME, form_username)
+                "SELECT * FROM users WHERE {} = '{}'".format(USERS_DB_PROPS.EMAIL, form_email)
             ).get("data")
 
             if len(user_data) >= 1:
-                flash("User already exists. Please choose another username.", "red")
+
+                if user_data[0].get(USERS_DB_PROPS.SIGNUP_TYPE) == "google":
+                    flash("You have already used this email in Google Login. Please use Google Login to continue", "red")
+
+                else:
+                    flash("Email already exists. Please choose another username.", "red")
+                
+                flash("Email already exists. Please choose another username.", "red")
             else:
                 try:
                     props = (USERS_DB_PROPS.EMAIL, USERS_DB_PROPS.USERNAME, USERS_DB_PROPS.PASSWORD, USERS_DB_PROPS.CATEGORIES, USERS_DB_PROPS.USERID, USERS_DB_PROPS.TOTAL_ENTRIES, USERS_DB_PROPS.SIGNUP_TYPE)
