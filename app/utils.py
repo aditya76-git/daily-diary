@@ -68,7 +68,8 @@ def render_dynamic_template(template_name, replacements=None, **kwargs):
     }
 
     for placeholder, value in standard_replacements.items():
-        template = template.replace(placeholder, value)
+        if value is not None:
+            template = template.replace(placeholder, value)
 
     
     if replacements:
